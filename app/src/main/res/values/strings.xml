@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FuelSmart</string>
+    <string-array name="names">
+        <item>Select the type of Fuel</item>
+        <item>Unleaded 91</item>
+        <item>Unleaded 95</item>
+        <item>Unleaded 98</item>
+        <item>Diesel</item>
+    </string-array>
+    <string name="title_activity_main_maps">MainMapsActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
+</resources>

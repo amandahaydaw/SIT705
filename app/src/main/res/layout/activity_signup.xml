@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="100"
+    android:background="#EEEEEE"
+    tools:context="com.example.fuelsmartapp.signup">
+    <ImageView
+        android:id="@+id/bar"
+        android:layout_width="355dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/bar"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/cornorimag"
+        android:layout_width="235dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="-32dp"
+        android:layout_marginTop="-57dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/cornorimag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="214dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginEnd="92dp"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:text="Welcome to Smart Fuel"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="217dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="sans-serif"
+        android:text="How you manage your petrol?
+If don’t then start from now!"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/fullname"
+        android:layout_width="364dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter your full name"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toTopOf="@+id/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter your email"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter your password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toTopOf="@+id/confirmpassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/confirmpassword"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="400dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Confirm password"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        app:layout_constraintBottom_toTopOf="@+id/location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="364dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter your your location"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="364dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="520dp"
+        android:layout_marginEnd="25dp"
+        android:backgroundTint="@color/black"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/have_an_account"
+        android:layout_width="214dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="92dp"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:text="Already have an account ?"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/have_an_account_signin"
+        android:layout_width="100dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="590dp"
+        android:layout_marginEnd="92dp"
+        android:ems="10"
+        android:fontFamily="sans-serif"
+        android:text="Sign in"
+        android:textAlignment="center"
+        android:textColor="#00E0FF"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
