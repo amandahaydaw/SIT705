@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void open_registration(View view) {
-        Intent intend = new Intent(this,MapsActivity.class);
+        Intent intend = new Intent(this,signup.class);
         startActivity(intend);
     }
 
