@@ -8,17 +8,6 @@
     android:weightSum="100"
     android:background="#EEEEEE"
     tools:context="com.example.fuelsmartapp.login">
-    <ImageView
-        android:id="@+id/bar"
-        android:layout_width="355dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="11dp"
-        android:src="@drawable/bar"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/cornorimag"
@@ -36,7 +25,7 @@
         android:layout_width="214dp"
         android:layout_height="27dp"
         android:layout_marginStart="92dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="92dp"
         android:ems="10"
         android:fontFamily="sans-serif"
@@ -54,19 +43,20 @@
         android:layout_width="363dp"
         android:layout_height="293dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginTop="140dp"
         android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/loginimg" />
 
+
     <EditText
         android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="640dp"
+        android:layout_marginTop="440dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="10dp"
         android:hint="Enter your email"
@@ -74,16 +64,17 @@
         android:selectAllOnFocus="true"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="490dp"
+        android:layout_marginTop="480dp"
         android:layout_marginEnd="25dp"
         android:hint="Enter your password"
         android:imeOptions="actionDone"
@@ -95,11 +86,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/forget"
+        android:id="@+id/forgotPassword"
         android:layout_width="117dp"
         android:layout_height="21dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="590dp"
+        android:layout_marginTop="520dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:fontFamily="sans-serif"
@@ -112,11 +103,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginBtn"
         android:layout_width="364dp"
         android:layout_height="60dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="615dp"
+        android:layout_marginTop="540dp"
         android:layout_marginEnd="25dp"
         android:backgroundTint="@color/black"
         android:text="Login"
@@ -130,7 +121,7 @@
         android:id="@+id/Do_not_have_an_account"
         android:layout_width="214dp"
         android:layout_height="27dp"
-        android:layout_marginTop="675dp"
+        android:layout_marginTop="600dp"
         android:layout_marginEnd="92dp"
         android:ems="10"
         android:fontFamily="sans-serif"
@@ -147,7 +138,7 @@
         android:layout_width="100dp"
         android:layout_height="27dp"
         android:layout_marginStart="210dp"
-        android:layout_marginTop="675dp"
+        android:layout_marginTop="600dp"
         android:layout_marginEnd="92dp"
         android:ems="10"
         android:fontFamily="sans-serif"
@@ -158,4 +149,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintVertical_bias="0.39" />
 </androidx.constraintlayout.widget.ConstraintLayout>
