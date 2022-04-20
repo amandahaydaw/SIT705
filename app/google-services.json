@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "647343858875",
+    "project_id": "fuelsmartapp",
+    "storage_bucket": "fuelsmartapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647343858875:android:42c634e4a3108cfbf8f59e",
+        "android_client_info": {
+          "package_name": "com.example.fuelsmartapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647343858875-495uh7cu08fg34lf7umm27e18tm7hphs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwWbX2GLr7GmrzGaoemwSJ7e3Sln1i8Og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647343858875-495uh7cu08fg34lf7umm27e18tm7hphs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

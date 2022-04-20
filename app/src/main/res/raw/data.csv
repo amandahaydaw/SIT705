@@ -1,0 +1,5 @@
+SiteId,Site_Name,Site_Brand,Sites_Address_Line_1,Site_Suburb,Site_State,Site_Post_Code,Site_Latitude,Site_Longitude,Fuel_Type,Price,TransactionDateutc
+61291313,7-Eleven Runaway Bay,BP,20 Bayview Street,Mungindi,QLD,4497,-27.923529,153.403729,Diesel,1840,1/3/2022 0:00
+61291313,Caltex Labrador,BP,150 Brisbane Road,Mungindi,QLD,4497,-27.924007,153.403869,Diesel,1860,2/3/2022 21:49
+61291313,Caltex Labrador Frank St,BP,69 Frank Street,Mungindi,QLD,4497,-27.923863,153.403528,Diesel,1900,3/3/2022 22:21
+61291313,BP Shop Helensvale,BP,2 Discovery Drive,Mungindi,QLD,4497,-27.923655,153.403608,Diesel,2150,9/3/2022 23:12
