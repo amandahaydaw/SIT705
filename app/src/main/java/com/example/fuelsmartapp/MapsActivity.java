@@ -6,24 +6,31 @@ import androidx.fragment.app.FragmentActivity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.fuelsmartapp.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.fuelsmartapp.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -39,6 +46,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        readWeatherData();                  // If you need to read the whole file row by row
+
 //        btn = findViewById(R.id.btn);
 //        btn.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -51,6 +60,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+    // Defining ordered collection as WeatherSample class
+    private List<ReadData> readData = new ArrayList<>();
+    List<List<Double>> Latitudelines = new ArrayList<>();
+    List<List<Double>> Longitude = new ArrayList<>();
+    List<List<String>> Site_Brand = new ArrayList<>();
+
+    // Read the data
+    ReadData sample = new ReadData();
+    private void readWeatherData() {
+        // Read the raw csv file
+        InputStream is = getResources().openRawResource(R.raw.data);
+
+        // Reads text from character-input stream, buffering characters for efficient reading
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        // Initialization
+        String line = "";
+
+        // Initialization
+        try {
+            // Step over headers
+            reader.readLine();
+
+            // If buffer is not empty
+            while ((line = reader.readLine()) != null) {
+//                Log.d("Creation", "Line: " + line);
+                // use comma as separator columns of CSV
+                String[] tokens = line.split(",");
+//array
+                Latitudelines.add(Arrays.asList(sample.getSite_Latitude()));
+                Longitude.add(Arrays.asList(sample.getSite_Longitude()));
+                Site_Brand.add(Arrays.asList(sample.getSite_Brand()));
+                // Setters
+                sample.setSite_Latitude(Double.parseDouble(tokens[7]));
+                sample.setSite_Longitude(Double.parseDouble(tokens[8]));
+                sample.setSite_Brand(tokens[1]);
+
+                readData.add(sample);
+
+//                System.out.println("before "+sample.getSite_Brand());
+//                System.out.println("after " + Site_Brand);
+            }
+
+        } catch (IOException e) {
+            // Logs error with priority level
+            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
+
+            // Prints throwable details
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Manipulates the map once available.
@@ -61,14 +123,70 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
         // Add a marker in Sydney and move the camera
-        LatLng Melb = new LatLng(-37.5971198,144.9037784);
-        mMap.addMarker(new MarkerOptions().position(Melb).title("7 Eleven").icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.seveneleven)));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb,15f));
+
+//        for(List<Double> line: Latitudelines) {
+//            for (List<Double> line2 : Longitude) {
+//                for (List<String> line3 : Site_Brand) {
+//                    for (Double Latitudelines_value : line) {
+//                        for (Double Longitude_value : line2) {
+//                            for (String Site_Brand_value : line3) {
+//                                System.out.println("Values are >>>>>> " + Latitudelines_value +Longitude_value+Site_Brand_value);
+//                                LatLng Melb = new LatLng(Latitudelines_value,Longitude_value);
+//                                mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.seveneleven)));
+//                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb,20f));
+//
+//                            }
+//                        }
+//                    }
+//
+//                }
+//            }
+//        }
+
+        List<Double> Latitudelines1 = new ArrayList<Double>();
+        List<Double> Longitude1 = new ArrayList<Double>();
+        List<String> Site_Brand1 = new ArrayList<String>();
+
+        for(List<Double> line: Latitudelines) {
+            Latitudelines1.addAll(line);
+        }
+
+        for (List<Double> line2 : Longitude) {
+            Longitude1.addAll(line2);
+
+        }
+
+
+        for (List<String> line3 : Site_Brand) {
+            Site_Brand1.addAll(line3);
+        }
+        System.out.println("after 1 " + Latitudelines1);
+        System.out.println("after 2 " + Longitude1);
+        System.out.println("after 3 " + Site_Brand1);
+
+        for (Double Latitudelines_value : Latitudelines1) {
+            for (Double Longitude_value : Longitude1) {
+                for (String Site_Brand_value : Site_Brand1) {
+                    System.out.println("Values are >>>>>> " + Latitudelines_value +Longitude_value+Site_Brand_value);
+                    LatLng Melb = new LatLng(Latitudelines_value,Longitude_value);
+                    mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.seveneleven)));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb,20f));
+
+                }
+            }
+        }
+
+//        System.out.println("this >>>>>> "+lines);
+//        LatLng Melb = new LatLng(sample.getSite_Latitude(),sample.getSite_Longitude());
+//        mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.seveneleven)));
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb,15f));
         // Setting a custom info window adapter for the google map
 //        InfoWindowAdapter markerInfoWindowAdapter = new InfoWindowAdapter(getApplicationContext());
 //        googleMap.setInfoWindowAdapter(markerInfoWindowAdapter);
@@ -89,6 +207,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onInfoWindowClick(Marker marker) {
         Toast.makeText(this, "Gir Forest Clicked!!!!", Toast.LENGTH_SHORT).show();
     }
+
+
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
