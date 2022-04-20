@@ -9,6 +9,7 @@ import com.example.fuelsmartapp.main.MainFragment;
 import android.view.View;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -26,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intend = new Intent(this,signup.class);
         startActivity(intend);
     }
+
 
 }

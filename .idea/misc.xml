@@ -6,7 +6,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.215" />
         <entry key="app/src/main/res/layout/activity_adding_vehicle_expense.xml" value="0.13016204833984368" />
-        <entry key="app/src/main/res/layout/activity_fuel_type.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_fuel_type.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2078125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2296195652173913" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.17083333333333334" />
