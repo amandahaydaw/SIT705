@@ -1,12 +1,11 @@
 package com.example.fuelsmartapp;
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-
-import com.example.fuelsmartapp.R;
 import com.example.fuelsmartapp.main.MainFragment;
-import android.view.View;
 
 
 
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void open_registration(View view) {
-        Intent intend = new Intent(this,signup.class);
+        Intent intend = new Intent(this,FuelType.class);
         startActivity(intend);
     }
 

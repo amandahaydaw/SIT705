@@ -1,8 +1,5 @@
 package com.example.fuelsmartapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -13,6 +10,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +36,7 @@ public class signup extends AppCompatActivity {
     ProgressBar progressBar;
     FirebaseFirestore fStore;
     String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class signup extends AppCompatActivity {
         mLoginBtn   = findViewById(R.id.have_an_account_signin);
 
         fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
+    fStore = FirebaseFirestore.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
 //        if(fAuth.getCurrentUser() != null){
@@ -63,8 +65,10 @@ public class signup extends AppCompatActivity {
                final String email =mEmail.getText().toString().trim();
                 String password=mPassword.getText().toString().trim();
                 String conpassword=cpassword.getText().toString().trim();
+
                 final String fullName = mFullName.getText().toString();
                 final String location    = mlocation.getText().toString();
+
                 if(TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required!");
                     return;
@@ -95,6 +99,7 @@ public class signup extends AppCompatActivity {
         // register the user in firebase
 
         fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -117,21 +122,27 @@ public class signup extends AppCompatActivity {
                     Toast.makeText(signup.this, "User Created.", Toast.LENGTH_SHORT).show();
                     userID = fAuth.getCurrentUser().getUid();
                     DocumentReference documentReference = fStore.collection("users").document(userID);
+
                     Map<String,Object> user = new HashMap<>();
                     user.put("fName",fullName);
                     user.put("email",email);
                     user.put("location",location);
+                    System.out.println("User ID is >>"+userID + fullName);
+
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d(TAG, "onSuccess: user Profile is created for "+ userID);
+                            Log.d("here1"+TAG, "onSuccess: user Profile is created for "+ userID);
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "onFailure: " + e.toString());
+                            Log.d("here2"+TAG, "onFailure: " + e.toString());
                         }
                     });
+
+
                     startActivity(new Intent(getApplicationContext(),FuelType.class));
 
                 }else {

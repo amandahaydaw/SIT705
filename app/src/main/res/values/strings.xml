@@ -10,4 +10,5 @@
     <string name="title_activity_main_maps">MainMapsActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_maps2">MapsActivity2</string>
+    <string name="select_the_type_of_fuel">Select the type of Fuel</string>
 </resources>
