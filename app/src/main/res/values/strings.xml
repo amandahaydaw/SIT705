@@ -11,4 +11,11 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_maps2">MapsActivity2</string>
     <string name="select_the_type_of_fuel">Select the type of Fuel</string>
+    <string name="pump">pump</string>
+    <string name="vehicle">vehicle</string>
+    <string name="location">location</string>
+    <string name="profile">profile</string>
+    <string name="notify">notify</string>
+    <string name="pump_image">pump_image</string>
+    <string name="textview">TextView</string>
 </resources>

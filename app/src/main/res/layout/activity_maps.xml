@@ -2,18 +2,18 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!--fragment to display our maps-->
-    <fragment xmlns:tools="http://schemas.android.com/tools"
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MapsActivity" />
 
-    <!--search view to search our location-->
     <androidx.appcompat.widget.SearchView
         android:id="@+id/idSearchView"
         android:layout_width="match_parent"
@@ -26,5 +26,101 @@
         android:elevation="5dp"
         app:iconifiedByDefault="false"
         app:queryHint="Search Here" />
+
+    <TextView
+        android:id="@+id/background"
+        android:layout_width="415dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="550dp"
+        android:background="#F5FFFFFF"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/line"
+        android:layout_width="415dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="610dp"
+        android:background="#C4C4C4"
+        android:inputType="textMultiLine"
+        android:importantForAutofill="no"
+        tools:ignore="LabelFor" />
+
+    <ImageView
+        android:id="@+id/pump"
+        android:layout_width="55dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="550dp"
+        android:contentDescription="@string/pump_image"
+        android:visibility="visible"
+        android:background="@drawable/pump"
+        app:srcCompat="@drawable/pump" />
+
+    <TextView
+        android:id="@+id/fuel_type_text"
+        android:layout_width="144dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="550dp"
+        android:text="@string/textview"
+        android:visibility="visible"
+        android:textSize="22sp" />
+
+    <ImageView
+        android:id="@+id/notification"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="625dp"
+        android:contentDescription="@string/notify"
+        android:background="@drawable/notification"
+        android:visibility="visible"
+        app:srcCompat="@drawable/notification" />
+
+    <ImageView
+        android:id="@+id/vehicle"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="625dp"
+        app:srcCompat="@drawable/vehicle"
+        android:visibility="visible"
+        android:background="@drawable/vehicle"
+        android:contentDescription="@string/vehicle" />
+
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="625dp"
+        android:layout_marginStart="188dp"
+        app:srcCompat="@drawable/location"
+        android:visibility="visible"
+        android:background="@drawable/location"
+        android:contentDescription="@string/location" />
+
+    <ImageView
+        android:id="@+id/fuel_pump"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="625dp"
+        android:layout_marginStart="250dp"
+        app:srcCompat="@drawable/pump"
+        android:background="@drawable/pump"
+        android:visibility="visible"
+        android:contentDescription="@string/pump" />
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="625dp"
+        android:background="@drawable/profile"
+        android:visibility="visible"
+        app:srcCompat="@drawable/profile"
+        android:contentDescription="@string/profile" />
+
+
+
 
 </RelativeLayout>
