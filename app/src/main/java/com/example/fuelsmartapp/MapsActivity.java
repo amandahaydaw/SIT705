@@ -1,26 +1,29 @@
 package com.example.fuelsmartapp;
 
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.fuelsmartapp.databinding.ActivityMapsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.BufferedReader;
@@ -38,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button btn;
     private Marker marker;
     private ActivityMapsBinding binding;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        searchView = findViewById(R.id.idSearchView);
         readWeatherData();                  // If you need to read the whole file row by row
 
 //        btn = findViewById(R.id.btn);
@@ -59,7 +63,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        //adding on query listener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String location = searchView.getQuery().toString();
+                List<Address> addressList = null;
+
+                // checking if the entered location is null or not.
+                if (location != null || location.equals("")) {
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Address address = addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        mapFragment.getMapAsync(this);
     }
+
     // Defining ordered collection as WeatherSample class
     private List<ReadData> readData = new ArrayList<>();
     List<List<Double>> Latitudelines = new ArrayList<>();
@@ -68,6 +104,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // Read the data
     ReadData sample = new ReadData();
+
     private void readWeatherData() {
         // Read the raw csv file
         InputStream is = getResources().openRawResource(R.raw.data);
@@ -154,7 +191,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         List<Double> Longitude1 = new ArrayList<Double>();
         List<String> Site_Brand1 = new ArrayList<String>();
 
-        for(List<Double> line: Latitudelines) {
+        for (List<Double> line : Latitudelines) {
             Latitudelines1.addAll(line);
         }
 
@@ -174,10 +211,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         for (Double Latitudelines_value : Latitudelines1) {
             for (Double Longitude_value : Longitude1) {
                 for (String Site_Brand_value : Site_Brand1) {
-                    System.out.println("Values are >>>>>> " + Latitudelines_value +Longitude_value+Site_Brand_value);
-                    LatLng Melb = new LatLng(Latitudelines_value,Longitude_value);
-                    mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.seveneleven)));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb,20f));
+                    System.out.println("Values are >>>>>> " + Latitudelines_value + Longitude_value + Site_Brand_value);
+                    LatLng Melb = new LatLng(Latitudelines_value, Longitude_value);
+                    mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 20f));
 
                 }
             }
