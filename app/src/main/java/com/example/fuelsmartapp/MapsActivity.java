@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.fuelsmartapp.databinding.ActivityMapsBinding;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,16 +33,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    GoogleApiClient mGoogleApiClient;
     private Button btn;
     private Marker marker;
     private ActivityMapsBinding binding;
     SearchView searchView;
+    String line = "";
+    String[] tokens;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         searchView = findViewById(R.id.idSearchView);
-        readWeatherData();                  // If you need to read the whole file row by row
+            // If you need to read the whole file row by row
 
 //        btn = findViewById(R.id.btn);
 //        btn.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
                     mMap.addMarker(new MarkerOptions().position(latLng).title(location));
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+
+
                 }
                 return false;
             }
@@ -94,6 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
         mapFragment.getMapAsync(this);
+
     }
 
     // Defining ordered collection as WeatherSample class
@@ -102,54 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     List<List<Double>> Longitude = new ArrayList<>();
     List<List<String>> Site_Brand = new ArrayList<>();
 
-    // Read the data
-    ReadData sample = new ReadData();
 
-    private void readWeatherData() {
-        // Read the raw csv file
-        InputStream is = getResources().openRawResource(R.raw.data);
-
-        // Reads text from character-input stream, buffering characters for efficient reading
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(is, Charset.forName("UTF-8"))
-        );
-
-        // Initialization
-        String line = "";
-
-        // Initialization
-        try {
-            // Step over headers
-            reader.readLine();
-
-            // If buffer is not empty
-            while ((line = reader.readLine()) != null) {
-//                Log.d("Creation", "Line: " + line);
-                // use comma as separator columns of CSV
-                String[] tokens = line.split(",");
-//array
-                Latitudelines.add(Arrays.asList(sample.getSite_Latitude()));
-                Longitude.add(Arrays.asList(sample.getSite_Longitude()));
-                Site_Brand.add(Arrays.asList(sample.getSite_Brand()));
-                // Setters
-                sample.setSite_Latitude(Double.parseDouble(tokens[7]));
-                sample.setSite_Longitude(Double.parseDouble(tokens[8]));
-                sample.setSite_Brand(tokens[1]);
-
-                readData.add(sample);
-
-//                System.out.println("before "+sample.getSite_Brand());
-//                System.out.println("after " + Site_Brand);
-            }
-
-        } catch (IOException e) {
-            // Logs error with priority level
-            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
-
-            // Prints throwable details
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Manipulates the map once available.
@@ -165,6 +124,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setRotateGesturesEnabled(false);
+        googleMap.getUiSettings().setScrollGesturesEnabled(false);
+        googleMap.getUiSettings().setTiltGesturesEnabled(false);
 
         // Add a marker in Sydney and move the camera
 
@@ -187,38 +150,56 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            }
 //        }
 
-        List<Double> Latitudelines1 = new ArrayList<Double>();
-        List<Double> Longitude1 = new ArrayList<Double>();
-        List<String> Site_Brand1 = new ArrayList<String>();
+//        List<Double> Latitudelines1 = new ArrayList<Double>();
+//        List<Double> Longitude1 = new ArrayList<Double>();
+//        List<String> Site_Brand1 = new ArrayList<String>();
+//
+//        System.out.println("before 1 " + Latitudelines);
+//        System.out.println("before 1 " + Longitude);
+//        System.out.println("before 1 " + Site_Brand);
+//
+//        for (List<Double> line : Latitudelines) {
+//            Latitudelines1.addAll(line);
+//        }
+//
+//        for (List<Double> line2 : Longitude) {
+//            Longitude1.addAll(line2);
+//
+//        }
+//
+//        for (List<String> line3 : Site_Brand) {
+//            Site_Brand1.addAll(line3);
+//        }
+//
+//        System.out.println("after 1 " + Latitudelines1);
+//        System.out.println("after 2 " + Longitude1);
+//        System.out.println("after 3 " + Site_Brand1);
 
-        for (List<Double> line : Latitudelines) {
-            Latitudelines1.addAll(line);
-        }
+//        for (Double Latitudelines_value : Latitudelines1) {
+//            for (Double Longitude_value : Longitude1) {
+//                for (String Site_Brand_value : Site_Brand1) {
+//                    System.out.println("Values are >>>>>> " + Latitudelines_value + Longitude_value + Site_Brand_value);
+//                    LatLng Melb = new LatLng(Latitudelines_value, Longitude_value);
+//                    mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 20f));
+//
+//                }
+//            }
+//        }
 
-        for (List<Double> line2 : Longitude) {
-            Longitude1.addAll(line2);
 
-        }
+//        System.out.println("this >>>>>> after " + tokens[1] );
+//        double lat = 0;
+//        double longi = 0;
+////        for (int i = 0; i < tokens.length(); i++) {
+//            lat = Double.parseDouble(tokens[7]);
+//            longi = Double.parseDouble(tokens[8]);
+//
+//            LatLng Melb = new LatLng(lat, longi);
+//            mMap.addMarker(new MarkerOptions().position(Melb).title(tokens[1]).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
+//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 10f));
 
-
-        for (List<String> line3 : Site_Brand) {
-            Site_Brand1.addAll(line3);
-        }
-        System.out.println("after 1 " + Latitudelines1);
-        System.out.println("after 2 " + Longitude1);
-        System.out.println("after 3 " + Site_Brand1);
-
-        for (Double Latitudelines_value : Latitudelines1) {
-            for (Double Longitude_value : Longitude1) {
-                for (String Site_Brand_value : Site_Brand1) {
-                    System.out.println("Values are >>>>>> " + Latitudelines_value + Longitude_value + Site_Brand_value);
-                    LatLng Melb = new LatLng(Latitudelines_value, Longitude_value);
-                    mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 20f));
-
-                }
-            }
-        }
+//        }
 
 //        System.out.println("this >>>>>> "+lines);
 //        LatLng Melb = new LatLng(sample.getSite_Latitude(),sample.getSite_Longitude());
@@ -238,7 +219,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //         marker.showInfoWindow();
 
 //        googleMap.setOnInfoWindowClickListener(this::onInfoWindowClick);
+        readWeatherData();
+    }
 
+    ReadData sample = new ReadData();
+
+    private void readWeatherData() {
+        // Read the raw csv file
+        InputStream is = getResources().openRawResource(R.raw.data);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        // Initialization
+        try {
+            reader.readLine();
+            while ((line = reader.readLine()) != null) {
+                tokens = line.split(",");
+                LatLng Melb = new LatLng(Double.parseDouble(tokens[7]),  Double.parseDouble(tokens[8]));
+                mMap.addMarker(new MarkerOptions().position(Melb).title(tokens[1]).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 18f));
+            }
+
+        } catch (IOException e) {
+            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
+            e.printStackTrace();
+        }
     }
 
     public void onInfoWindowClick(Marker marker) {
