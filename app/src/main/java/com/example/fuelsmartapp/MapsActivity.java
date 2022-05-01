@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
@@ -52,8 +53,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        passData();
         searchView = findViewById(R.id.idSearchView);
-            // If you need to read the whole file row by row
+        // If you need to read the whole file row by row
 
 //        btn = findViewById(R.id.btn);
 //        btn.setOnClickListener(new View.OnClickListener() {
@@ -101,13 +103,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
     }
-
+    public void passData() {
+        TextView display = findViewById(R.id.fuel_type_text);
+        Bundle bn=getIntent().getExtras();
+        String name = bn.getString("text5");
+        display.setText(String.valueOf(name));
+    }
     // Defining ordered collection as WeatherSample class
     private List<ReadData> readData = new ArrayList<>();
     List<List<Double>> Latitudelines = new ArrayList<>();
     List<List<Double>> Longitude = new ArrayList<>();
     List<List<String>> Site_Brand = new ArrayList<>();
-
 
 
     /**
@@ -219,12 +225,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //         marker.showInfoWindow();
 
 //        googleMap.setOnInfoWindowClickListener(this::onInfoWindowClick);
-        readWeatherData();
+        readDataFromCSV();
     }
 
     ReadData sample = new ReadData();
 
-    private void readWeatherData() {
+    private void readDataFromCSV() {
         // Read the raw csv file
         InputStream is = getResources().openRawResource(R.raw.data);
         BufferedReader reader = new BufferedReader(
@@ -242,7 +248,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
 
         } catch (IOException e) {
-            Log.wtf("MyActivity", "Error reading data file on line" + line, e);
+            Log.wtf("MapsActivity", "Error reading data file on line" + line, e);
             e.printStackTrace();
         }
     }

@@ -21,9 +21,10 @@ public class FuelType extends AppCompatActivity {
     TextView hi;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
-    String userId;
+    String userId, text;
     Spinner spinner1;
 
+    Intent intend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class FuelType extends AppCompatActivity {
         setContentView(R.layout.activity_fuel_type);
         hi = findViewById(R.id.hi);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
+
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
@@ -47,21 +49,24 @@ public class FuelType extends AppCompatActivity {
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(FuelType.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
+
+
     }
 
 
     public void fuel_Check(View view) {
         View selectedView = spinner1.getSelectedView();
-        if(spinner1.getSelectedItem().equals("Select the type of Fuel")){
+        if (spinner1.getSelectedItem().equals("Select the type of Fuel")) {
             TextView selectedTextView = (TextView) selectedView;
             selectedTextView.setError("error");
             spinner1.performClick();
-        }else {
-            Intent intend = new Intent(this, MapsActivity.class);
+        } else {
+            text = spinner1.getSelectedItem().toString();
+            intend = new Intent(this, MapsActivity.class);
+            intend.putExtra("text5",text);
             startActivity(intend);
         }
     }
-
 
 }
 

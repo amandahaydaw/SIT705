@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class signup extends AppCompatActivity {
     public static final String TAG = "TAG";
-    EditText mFullName,mEmail,mPassword,cpassword,mlocation;
+    EditText mFullName, mEmail, mPassword, cpassword, mlocation;
     Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
@@ -42,123 +42,122 @@ public class signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        mFullName   = findViewById(R.id.fullName);
-        mEmail      = findViewById(R.id.Email);
-        mPassword   = findViewById(R.id.password);
-        cpassword   = findViewById(R.id.confirmpassword);
-        mlocation      = findViewById(R.id.location);
-        mRegisterBtn= findViewById(R.id.registerBtn);
-        mLoginBtn   = findViewById(R.id.have_an_account_signin);
+        mFullName = findViewById(R.id.fullName);
+        mEmail = findViewById(R.id.Email);
+        mPassword = findViewById(R.id.password);
+        cpassword = findViewById(R.id.confirmpassword);
+        mlocation = findViewById(R.id.location);
+        mRegisterBtn = findViewById(R.id.registerBtn);
+        mLoginBtn = findViewById(R.id.have_an_account_signin);
 
         fAuth = FirebaseAuth.getInstance();
-    fStore = FirebaseFirestore.getInstance();
+        fStore = FirebaseFirestore.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
-//        if(fAuth.getCurrentUser() != null){
-//            startActivity(new Intent(getApplicationContext(),signup.class));
-//            finish();
-//        }
-        mRegisterBtn.setOnClickListener(new View.OnClickListener()
-        {
+        if(fAuth.getCurrentUser() != null){
+            startActivity(new Intent(getApplicationContext(),signup.class));
+            finish();
+        }
+        mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-               final String email =mEmail.getText().toString().trim();
-                String password=mPassword.getText().toString().trim();
-                String conpassword=cpassword.getText().toString().trim();
+            public void onClick(View v) {
+                final String email = mEmail.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
+                String conpassword = cpassword.getText().toString().trim();
 
                 final String fullName = mFullName.getText().toString();
-                final String location    = mlocation.getText().toString();
+                final String location = mlocation.getText().toString();
 
-                if(TextUtils.isEmpty(email)) {
+                if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required!");
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Password is Required!");
                     return;
                 }
 
-                if(TextUtils.isEmpty(conpassword)){
+                if (TextUtils.isEmpty(conpassword)) {
                     cpassword.setError("confirm password is Required!");
                     return;
                 }
 
-                if(password.length() < 6){
+                if (password.length() < 6) {
                     mPassword.setError("Password Must be >= 6 Characters");
                     return;
                 }
 
-                if(!password.equals(conpassword)){
+                if (!password.equals(conpassword)) {
                     cpassword.setError("Confirmed Password Must be same!");
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
 
 
-        // register the user in firebase
+                // register the user in firebase
 
-        fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
 
-                    // send verification link
+                            // send verification link
 
-                    FirebaseUser fuser = fAuth.getCurrentUser();
-                    fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(signup.this, "Verification Email Has been Sent.", Toast.LENGTH_SHORT).show();
+                            FirebaseUser fuser = fAuth.getCurrentUser();
+                            fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(signup.this, "Verification Email Has been Sent.", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d(TAG, "onFailure: Email not sent " + e.getMessage());
+                                }
+                            });
+
+                            Toast.makeText(signup.this, "User Created.", Toast.LENGTH_SHORT).show();
+                            userID = fAuth.getCurrentUser().getUid();
+                            DocumentReference documentReference = fStore.collection("users").document(userID);
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("fName", fullName);
+                            user.put("email", email);
+                            user.put("location", location);
+                            System.out.println("User ID is >>" + userID + fullName);
+
+                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("here1" + TAG, "onSuccess: user Profile is created for " + userID);
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("here2" + TAG, "onFailure: " + e.toString());
+                                }
+                            });
+
+
+                            startActivity(new Intent(getApplicationContext(), FuelType.class));
+
+                        } else {
+                            Toast.makeText(signup.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "onFailure: Email not sent " + e.getMessage());
-                        }
-                    });
-
-                    Toast.makeText(signup.this, "User Created.", Toast.LENGTH_SHORT).show();
-                    userID = fAuth.getCurrentUser().getUid();
-                    DocumentReference documentReference = fStore.collection("users").document(userID);
-
-                    Map<String,Object> user = new HashMap<>();
-                    user.put("fName",fullName);
-                    user.put("email",email);
-                    user.put("location",location);
-                    System.out.println("User ID is >>"+userID + fullName);
-
-                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d("here1"+TAG, "onSuccess: user Profile is created for "+ userID);
-
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d("here2"+TAG, "onFailure: " + e.toString());
-                        }
-                    });
-
-
-                    startActivity(new Intent(getApplicationContext(),FuelType.class));
-
-                }else {
-                    Toast.makeText(signup.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
-                }
+                    }
+                });
             }
         });
-    }
-});
 
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),login.class));
+                startActivity(new Intent(getApplicationContext(), login.class));
             }
         });
     }
