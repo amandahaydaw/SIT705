@@ -57,6 +57,7 @@
         android:layout_marginTop="300dp"
         android:layout_marginEnd="20dp"
         android:minHeight="48dp"
+        android:hint="@string/select_the_type_of_fuel"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -70,6 +71,7 @@
         android:layout_marginEnd="25dp"
         android:backgroundTint="@color/black"
         android:text="Check"
+        android:onClick="fuel_Check"
         android:textColor="#FFFFFF"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,4 +110,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hi"
+        android:layout_width="152dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginBottom="13dp"
+        android:fontFamily="sans-serif"
+        android:text=""
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <TextView
+        android:id="@+id/hi_text"
+        android:layout_width="41dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginBottom="13dp"
+        android:text="Hi "
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/welcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
