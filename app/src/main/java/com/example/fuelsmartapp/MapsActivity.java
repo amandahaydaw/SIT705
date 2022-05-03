@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -46,6 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SearchView searchView;
     String line = "";
     String[] tokens;
+    LatLng Melb;
+    String title, title2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,17 +104,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
     }
+
     public void passData() {
         TextView display = findViewById(R.id.fuel_type_text);
-        Bundle bn=getIntent().getExtras();
+        Bundle bn = getIntent().getExtras();
         String name = bn.getString("text5");
         display.setText(String.valueOf(name));
     }
-    // Defining ordered collection as WeatherSample class
-    private List<ReadData> readData = new ArrayList<>();
-    List<List<Double>> Latitudelines = new ArrayList<>();
-    List<List<Double>> Longitude = new ArrayList<>();
-    List<List<String>> Site_Brand = new ArrayList<>();
 
 
     /**
@@ -135,100 +132,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.getUiSettings().setScrollGesturesEnabled(false);
         googleMap.getUiSettings().setTiltGesturesEnabled(false);
 
-        // Add a marker in Sydney and move the camera
 
-//        for(List<Double> line: Latitudelines) {
-//            for (List<Double> line2 : Longitude) {
-//                for (List<String> line3 : Site_Brand) {
-//                    for (Double Latitudelines_value : line) {
-//                        for (Double Longitude_value : line2) {
-//                            for (String Site_Brand_value : line3) {
-//                                System.out.println("Values are >>>>>> " + Latitudelines_value +Longitude_value+Site_Brand_value);
-//                                LatLng Melb = new LatLng(Latitudelines_value,Longitude_value);
-//                                mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.seveneleven)));
-//                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb,20f));
-//
-//                            }
-//                        }
-//                    }
-//
-//                }
-//            }
-//        }
-
-//        List<Double> Latitudelines1 = new ArrayList<Double>();
-//        List<Double> Longitude1 = new ArrayList<Double>();
-//        List<String> Site_Brand1 = new ArrayList<String>();
-//
-//        System.out.println("before 1 " + Latitudelines);
-//        System.out.println("before 1 " + Longitude);
-//        System.out.println("before 1 " + Site_Brand);
-//
-//        for (List<Double> line : Latitudelines) {
-//            Latitudelines1.addAll(line);
-//        }
-//
-//        for (List<Double> line2 : Longitude) {
-//            Longitude1.addAll(line2);
-//
-//        }
-//
-//        for (List<String> line3 : Site_Brand) {
-//            Site_Brand1.addAll(line3);
-//        }
-//
-//        System.out.println("after 1 " + Latitudelines1);
-//        System.out.println("after 2 " + Longitude1);
-//        System.out.println("after 3 " + Site_Brand1);
-
-//        for (Double Latitudelines_value : Latitudelines1) {
-//            for (Double Longitude_value : Longitude1) {
-//                for (String Site_Brand_value : Site_Brand1) {
-//                    System.out.println("Values are >>>>>> " + Latitudelines_value + Longitude_value + Site_Brand_value);
-//                    LatLng Melb = new LatLng(Latitudelines_value, Longitude_value);
-//                    mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
-//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 20f));
-//
-//                }
-//            }
-//        }
-
-
-//        System.out.println("this >>>>>> after " + tokens[1] );
-//        double lat = 0;
-//        double longi = 0;
-////        for (int i = 0; i < tokens.length(); i++) {
-//            lat = Double.parseDouble(tokens[7]);
-//            longi = Double.parseDouble(tokens[8]);
-//
-//            LatLng Melb = new LatLng(lat, longi);
-//            mMap.addMarker(new MarkerOptions().position(Melb).title(tokens[1]).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 10f));
-
-//        }
-
-//        System.out.println("this >>>>>> "+lines);
-//        LatLng Melb = new LatLng(sample.getSite_Latitude(),sample.getSite_Longitude());
-//        mMap.addMarker(new MarkerOptions().position(Melb).title(Site_Brand_value).icon(bitmapDescriptorFromVector(getApplicationContext(),R.drawable.seveneleven)));
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb,15f));
-        // Setting a custom info window adapter for the google map
-//        InfoWindowAdapter markerInfoWindowAdapter = new InfoWindowAdapter(getApplicationContext());
-//        googleMap.setInfoWindowAdapter(markerInfoWindowAdapter);
-
-        // Adding and showing marker when the map is touched
-
-//        mMap.clear();
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.position(Melb);
-//        mMap.animateCamera(CameraUpdateFactory.newLatLng(Melb));
-//        marker = mMap.addMarker(markerOptions);
-//         marker.showInfoWindow();
-
-//        googleMap.setOnInfoWindowClickListener(this::onInfoWindowClick);
+        googleMap.setOnInfoWindowClickListener(this::onInfoWindowClick);
         readDataFromCSV();
     }
 
-    ReadData sample = new ReadData();
+
 
     private void readDataFromCSV() {
         // Read the raw csv file
@@ -242,9 +151,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 tokens = line.split(",");
-                LatLng Melb = new LatLng(Double.parseDouble(tokens[7]),  Double.parseDouble(tokens[8]));
-                mMap.addMarker(new MarkerOptions().position(Melb).title(tokens[1]).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
+                Melb = new LatLng(Double.parseDouble(tokens[7]), Double.parseDouble(tokens[8]));
+                title = tokens[2] + " \n" + "Address: " + tokens[3] + " ," + " " + tokens[4] + " ," + tokens[5] + " ," + tokens[6] + " \n" + tokens[9] + " ," + " $" + tokens[10];
+                title2 = "Fuel selected as " + tokens[9] + " is costing" + " $" + tokens[10] + " per liter";
+                mMap.addMarker(new MarkerOptions().position(Melb).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
+
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 18f));
+                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
+
             }
 
         } catch (IOException e) {
@@ -254,9 +168,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(this, "Gir Forest Clicked!!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, title2, Toast.LENGTH_LONG).show();
     }
-
+//display text once user click
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
