@@ -64,13 +64,14 @@ public class FuelType extends AppCompatActivity {
             spinner1.performClick();
         } else {
             text = spinner1.getSelectedItem().toString();
+            progressBar.setVisibility(View.VISIBLE);
             try {
-                Thread.sleep(7000);
+                Thread.sleep(6000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            progressBar.setVisibility(View.VISIBLE);
+
             intend = new Intent(this, MapsActivity.class);
             intend.putExtra("text5",text);
             startActivity(intend);

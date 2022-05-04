@@ -191,6 +191,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void profile_nav(View view) {
         Intent intend = new Intent(this, profile.class);
         startActivity(intend);
+    }
+
+
+
+    public void adding_vehicle_expenses(View view) {
+//        Intent intend = new Intent(this, adding_vehicle_expense.class);
+//        startActivity(intend);
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
 
     }
+
+    public void changing_fuel_type(View view) {
+        Intent intend = new Intent(this, FuelType.class);
+        startActivity(intend);
+    }
+
+    public void change_location(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+
+    }
+    public void notification(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+    }
+
+
 }
