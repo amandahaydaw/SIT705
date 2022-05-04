@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,19 +24,20 @@ public class FuelType extends AppCompatActivity {
     FirebaseFirestore fStore;
     String userId, text;
     Spinner spinner1;
-
+    ProgressBar progressBar;
     Intent intend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fuel_type);
+
         hi = findViewById(R.id.hi);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
 
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
-
+        progressBar = findViewById(R.id.progressBar);
         userId = fAuth.getCurrentUser().getUid();
         DocumentReference documentReference = fStore.collection("users").document(userId);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -62,6 +64,13 @@ public class FuelType extends AppCompatActivity {
             spinner1.performClick();
         } else {
             text = spinner1.getSelectedItem().toString();
+            try {
+                Thread.sleep(7000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            progressBar.setVisibility(View.VISIBLE);
             intend = new Intent(this, MapsActivity.class);
             intend.putExtra("text5",text);
             startActivity(intend);
