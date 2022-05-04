@@ -116,9 +116,10 @@
         android:layout_marginStart="330dp"
         android:layout_marginTop="625dp"
         android:background="@drawable/profile"
+        android:contentDescription="@string/profile"
+        android:onClick="profile_nav"
         android:visibility="visible"
-        app:srcCompat="@drawable/profile"
-        android:contentDescription="@string/profile" />
+        app:srcCompat="@drawable/profile" />
 
 
 

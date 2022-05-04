@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FuelSmart">
         <activity
+            android:name=".profile"
+            android:exported="false" />
+        <activity
             android:name=".expense_layout"
             android:exported="false" />
         <activity
