@@ -2,6 +2,7 @@ package com.example.fuelsmartapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
@@ -70,7 +71,7 @@ public class FuelType extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+            Log.i("FuelType", "Fuel selection checked");
 
             intend = new Intent(this, MapsActivity.class);
             intend.putExtra("text5",text);

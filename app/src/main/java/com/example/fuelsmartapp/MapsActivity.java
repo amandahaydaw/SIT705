@@ -160,8 +160,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Melb = new LatLng(Double.parseDouble(tokens[7]), Double.parseDouble(tokens[8]));
                 title = tokens[2] + " \n" + "Address: " + tokens[3] + " ," + " " + tokens[4] + " ," + tokens[5] + " ," + tokens[6] + " \n" + tokens[9] + " ," + " $" + tokens[10];
                 title2 = "Fuel selected as " + tokens[9] + " is costing" + " $" + tokens[10] + " per liter";
-                mMap.addMarker(new MarkerOptions().position(Melb).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
 
+                mMap.addMarker(new MarkerOptions().position(Melb).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 18f));
                 mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
