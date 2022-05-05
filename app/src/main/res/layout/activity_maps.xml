@@ -71,9 +71,10 @@
         android:layout_height="38dp"
         android:layout_marginStart="26dp"
         android:layout_marginTop="625dp"
-        android:contentDescription="@string/notify"
         android:background="@drawable/notification"
+        android:contentDescription="@string/notify"
         android:visibility="visible"
+        android:onClick="notification"
         app:srcCompat="@drawable/notification" />
 
     <ImageView
@@ -82,10 +83,11 @@
         android:layout_height="38dp"
         android:layout_marginStart="110dp"
         android:layout_marginTop="625dp"
-        app:srcCompat="@drawable/vehicle"
-        android:visibility="visible"
         android:background="@drawable/vehicle"
-        android:contentDescription="@string/vehicle" />
+        android:contentDescription="@string/vehicle"
+        android:visibility="visible"
+        android:onClick="adding_vehicle_expenses"
+        app:srcCompat="@drawable/vehicle" />
 
     <ImageView
         android:id="@+id/location"
@@ -94,6 +96,7 @@
         android:layout_marginTop="625dp"
         android:layout_marginStart="188dp"
         app:srcCompat="@drawable/location"
+        android:onClick="change_location"
         android:visibility="visible"
         android:background="@drawable/location"
         android:contentDescription="@string/location" />
@@ -102,12 +105,13 @@
         android:id="@+id/fuel_pump"
         android:layout_width="33dp"
         android:layout_height="38dp"
-        android:layout_marginTop="625dp"
         android:layout_marginStart="250dp"
-        app:srcCompat="@drawable/pump"
+        android:layout_marginTop="625dp"
         android:background="@drawable/pump"
+        android:contentDescription="@string/pump"
+        android:onClick="changing_fuel_type"
         android:visibility="visible"
-        android:contentDescription="@string/pump" />
+        app:srcCompat="@drawable/pump" />
 
     <ImageView
         android:id="@+id/profile"
@@ -116,9 +120,10 @@
         android:layout_marginStart="330dp"
         android:layout_marginTop="625dp"
         android:background="@drawable/profile"
+        android:contentDescription="@string/profile"
+        android:onClick="profile_nav"
         android:visibility="visible"
-        app:srcCompat="@drawable/profile"
-        android:contentDescription="@string/profile" />
+        app:srcCompat="@drawable/profile" />
 
 
 

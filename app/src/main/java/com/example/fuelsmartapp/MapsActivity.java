@@ -1,6 +1,7 @@
 package com.example.fuelsmartapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -8,6 +9,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -113,6 +115,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+
+
+
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -154,8 +160,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Melb = new LatLng(Double.parseDouble(tokens[7]), Double.parseDouble(tokens[8]));
                 title = tokens[2] + " \n" + "Address: " + tokens[3] + " ," + " " + tokens[4] + " ," + tokens[5] + " ," + tokens[6] + " \n" + tokens[9] + " ," + " $" + tokens[10];
                 title2 = "Fuel selected as " + tokens[9] + " is costing" + " $" + tokens[10] + " per liter";
-                mMap.addMarker(new MarkerOptions().position(Melb).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
 
+                mMap.addMarker(new MarkerOptions().position(Melb).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Melb, 18f));
                 mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
@@ -180,5 +186,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
+
+
+    public void profile_nav(View view) {
+        Intent intend = new Intent(this, profile.class);
+        startActivity(intend);
+    }
+
+
+
+    public void adding_vehicle_expenses(View view) {
+//        Intent intend = new Intent(this, adding_vehicle_expense.class);
+//        startActivity(intend);
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+
+    }
+
+    public void changing_fuel_type(View view) {
+        Intent intend = new Intent(this, FuelType.class);
+        startActivity(intend);
+    }
+
+    public void change_location(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+
+    }
+    public void notification(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+    }
+
 
 }

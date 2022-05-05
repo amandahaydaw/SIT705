@@ -116,7 +116,7 @@
         android:layout_width="152dp"
         android:layout_height="32dp"
         android:layout_marginTop="212dp"
-        android:layout_marginEnd="128dp"
+        android:layout_marginEnd="96dp"
         android:layout_marginBottom="13dp"
         android:fontFamily="sans-serif"
         android:text=""
@@ -126,13 +126,13 @@
         app:layout_constraintBottom_toTopOf="@+id/welcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/hi_text"
         android:layout_width="41dp"
         android:layout_height="32dp"
-        android:layout_marginStart="98dp"
+        android:layout_marginStart="140dp"
         android:layout_marginTop="212dp"
         android:layout_marginBottom="13dp"
         android:text="Hi "
@@ -141,7 +141,20 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/welcome"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="264dp"
+        android:visibility="invisible"
+        android:background="@drawable/circular_shape"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
