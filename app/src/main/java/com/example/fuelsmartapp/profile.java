@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,4 +55,19 @@ public class profile extends AppCompatActivity {
         finish();
     }
 
+    public void data(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+    }
+    public void account(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+    }
+    public void personal(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+    }
+    public void security(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+    }
+    public void message(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+    }
 }
