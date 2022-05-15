@@ -80,5 +80,3 @@ public class FuelType extends AppCompatActivity {
     }
 
 }
-
-
