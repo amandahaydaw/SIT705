@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="180dp"
         android:text="Fuel Type"
         android:textColor="#0E0E0E"
         android:textSize="18dp"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="40dp"
         android:text="Date"
         android:textColor="#0E0E0E"
         android:textSize="18dp"
@@ -65,22 +65,46 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="46dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="137dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="68dp"
         android:ems="10"
         android:inputType="date"
+        android:hint="Enter Date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateText" />
+        app:layout_constraintStart_toEndOf="@+id/dateText"
+        app:layout_constraintTop_toBottomOf="@+id/spinner1" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="26dp"
+        android:layout_height="32dp"
+        android:layout_below="@+id/date"
+        android:layout_marginStart="90dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/calender"
+        app:layout_constraintBottom_toBottomOf="@+id/date"
+        app:layout_constraintEnd_toEndOf="@+id/date"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/date"
+        app:layout_constraintTop_toTopOf="@+id/date"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/calenderView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textSize="18dp"/>
     <TextView
         android:id="@+id/vehicleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="36dp"
         android:text="Vehicle Number"
         android:textColor="#0E0E0E"
         android:textSize="18dp"
@@ -90,21 +114,23 @@
 
     <EditText
         android:id="@+id/vehicle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="17dp"
+        android:layout_width="143dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="68dp"
         android:ems="10"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vehicleText" />
+        app:layout_constraintTop_toBottomOf="@+id/date" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="48dp"
         android:text="Total Cost"
         android:textColor="#0E0E0E"
         android:textSize="18dp"
@@ -116,58 +142,67 @@
         android:id="@+id/cost"
         android:layout_width="111dp"
         android:layout_height="50dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="144dp"
         android:ems="10"
         android:hint="$"
         android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/vehicle" />
 
     <TextView
         android:id="@+id/litertext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="48dp"
         android:text="Liters"
         android:textColor="#0E0E0E"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/liter"
-        app:layout_constraintStart_toEndOf="@+id/cost"
-        app:layout_constraintTop_toBottomOf="@+id/vehicle" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cost" />
 
     <EditText
         android:id="@+id/liter"
         android:layout_width="111dp"
         android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="164dp"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/litertext"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/cost" />
 
     <Spinner
         android:id="@+id/spinner1"
-        android:layout_width="318dp"
-        android:layout_height="40dp"
+        android:layout_width="240dp"
+        android:layout_height="42dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="38dp"
         android:layout_marginEnd="46dp"
-        android:layout_marginBottom="407dp"
         android:minHeight="48dp"
         android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fuelType"
-        app:layout_constraintVertical_bias="0.011" />
-
+        app:layout_constraintTop_toBottomOf="@+id/welcome" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="264dp"
+        android:visibility="invisible"
+        android:background="@drawable/circular_shape"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
     <Button
         android:id="@+id/check"
         android:layout_width="364dp"
@@ -176,7 +211,6 @@
         android:layout_marginTop="560dp"
         android:layout_marginEnd="25dp"
         android:backgroundTint="@color/black"
-        android:onClick="Save"
         android:text="save"
         android:textColor="#FFFFFF"
         android:textSize="14dp"
