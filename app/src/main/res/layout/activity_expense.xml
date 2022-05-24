@@ -1,15 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".adding_vehicle_expense">
+    android:layout_height="match_parent">
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/idGraphView"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/cornorimag"
+        android:layout_width="235dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="-32dp"
+        android:layout_marginTop="-57dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/cornorimag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/background"
+        android:layout_width="415dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="500dp"
+        android:background="#F5FFFFFF"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/expense"
+        android:layout_width="415dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="250dp"
+        android:background="#D1D4D1"
+        android:textSize="22sp" />
+
+
+    <TextView
+        android:id="@+id/total_spent"
+        android:layout_width="165dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="280dp"
+        android:text="Total Spent:"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/spent"
+        android:layout_width="117dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="280dp"
+        android:text="$"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/select_month"
+        android:layout_width="400dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="140dp"
+        android:text="Select Month to display your Fuel cost >"
+        android:textSize="22sp" />
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="400dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="180dp"
+        android:hint="@string/select_month"
+        android:minHeight="48dp"
+        android:spinnerMode="dropdown"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/notification"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="575dp"
+        android:background="@drawable/notification"
+        android:contentDescription="@string/notify"
+        android:visibility="visible"
+        android:onClick="notification"
+        app:srcCompat="@drawable/notification" />
+
+    <ImageView
+        android:id="@+id/vehicle"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="575dp"
+        android:background="@drawable/vehicle"
+        android:contentDescription="@string/vehicle"
+        android:visibility="visible"
+        android:onClick="adding_vehicle_expenses"
+        app:srcCompat="@drawable/vehicle" />
+
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="575dp"
+        android:layout_marginStart="188dp"
+        app:srcCompat="@drawable/location"
+        android:onClick="change_location"
+        android:visibility="visible"
+        android:background="@drawable/location"
+        android:contentDescription="@string/location" />
+
+    <ImageView
+        android:id="@+id/fuel_pump"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="575dp"
+        android:background="@drawable/pump"
+        android:contentDescription="@string/pump"
+        android:onClick="changing_fuel_type"
+        android:visibility="visible"
+        app:srcCompat="@drawable/pump" />
+
+    <ImageView
+        android:id="@+id/profile"
+        android:layout_width="33dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="575dp"
+        android:background="@drawable/profile"
+        android:contentDescription="@string/profile"
+        android:onClick="profile_nav"
+        android:visibility="visible"
+        app:srcCompat="@drawable/profile" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true" />
+        android:layout_marginLeft="280dp"
+        android:layout_marginTop="380dp"
+        android:backgroundTint="@color/black"
+        android:onClick="add"
+        android:text="+"
+        android:textColor="#FFFFFF" />
+
 
 </RelativeLayout>

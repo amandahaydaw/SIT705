@@ -22,11 +22,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jjoe64.graphview.GraphView;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,6 +70,7 @@ public class adding_vehicle_expense extends AppCompatActivity {
         myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(myAdapter);
 
+        CollectionReference ref = fStore.collection("data");
 
         tvw = (TextView) findViewById(R.id.calenderView);
         eText = (EditText) findViewById(R.id.date);
@@ -84,7 +87,7 @@ public class adding_vehicle_expense extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                eText.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                eText.setText((monthOfYear + 1)  + "/" + dayOfMonth + "/" + year);
                             }
                         }, year, month, day);
                 picker.show();
@@ -138,22 +141,22 @@ public class adding_vehicle_expense extends AppCompatActivity {
                                         progressBar.setVisibility(View.VISIBLE);
                                         userID = fAuth.getCurrentUser().getUid();
                                         DocumentReference documentReference = fStore.collection("data").document(userID);
-                                        Map<String, Object> user = new HashMap<>();
-                                        user.put("date", dates);
-                                        user.put("vehicle_number", vehicle_number);
-                                        user.put("cost", costs);
-                                        user.put("liters", liters);
-                                        user.put("fuel_type", sp);
+                                        Map<String, Object> data = new HashMap<>();
+                                        data.put("date", new Date(dates));
+                                        data.put("vehicle_number", vehicle_number);
+                                        data.put("cost", costs);
+                                        data.put("liters", liters);
+                                        data.put("fuel_type", sp);
+                                        data.put("ID", userID);
 
-
-                                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        ref.add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                             @Override
-                                            public void onSuccess(Void aVoid) {
+                                            public void onSuccess(DocumentReference documentReference) {
                                                 Log.d("here1" + TAG, "onSuccess: Data inserted for " + userID);
                                                 Toast.makeText(adding_vehicle_expense.this, "Data inserted Successfully", Toast.LENGTH_SHORT).show();
                                                 progressBar.setVisibility(View.GONE);
 
-                                                startActivity(new Intent(getApplicationContext(), MapsActivity.class));
+                                                startActivity(new Intent(getApplicationContext(), expense_view.class));
 
 
                                             }
@@ -163,8 +166,6 @@ public class adding_vehicle_expense extends AppCompatActivity {
                                                 Log.d("here2" + TAG, "onFailure: " + e.toString());
                                             }
                                         });
-
-
 
 
 
