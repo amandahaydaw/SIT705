@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/fuel_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FuelSmart">
+
         <activity
             android:name=".expense_view"
             android:exported="false" />

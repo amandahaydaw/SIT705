@@ -1,9 +1,9 @@
 package com.example.fuelsmartapp;
 
 public class ReadData {
-    private double Site_Latitude;//month
-    private double Site_Longitude;//rainfall
-    private String Site_Brand;//sumHours
+    private double Site_Latitude;
+    private double Site_Longitude;
+    private String Site_Brand;
 
     public double getSite_Latitude() {
         return Site_Latitude;
@@ -30,16 +30,6 @@ public class ReadData {
         this.Site_Brand = Site_Brand;
     }
 
-//    @Override
-//    public String toString() {
-////        return "WeatherSample{" +
-////                "Site_Latitude='" + Site_Latitude + '\'' +
-////                ", Site_Longitude=" + Site_Longitude +
-////                ", Site_Brand=" + Site_Brand +
-////                '}';
-//        return Site_Latitude;
-//
-//    }
 @Override
 public String toString() {
 

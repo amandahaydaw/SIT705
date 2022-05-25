@@ -66,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     LatLng mylocation;
     String title, title2, name;
     String[] token;
-    String fuel_type, img, address, suburb, state,titles;
+    String fuel_type, img, address, suburb, state, titles;
     double lat, lon, cost, postcode;
     LatLng pos;
 
@@ -74,11 +74,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         binding = ActivityMapsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         passData();
         searchView = findViewById(R.id.idSearchView);
+
         // If you need to read the whole file row by row
 
 //        btn = findViewById(R.id.btn);
@@ -94,8 +94,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
         //adding on query listener
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -170,16 +168,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
-//            getChatrooms();
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -197,7 +189,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d(TAG, "isServicesOK: Google Play Services is working");
             return true;
         } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
-            //an error occured but we can resolve it
             Log.d(TAG, "isServicesOK: an error occured but we can fix it");
             Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(MapsActivity.this, available, ERROR_DIALOG_REQUEST);
             dialog.show();
@@ -235,17 +226,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else {
             getLocationPermission();
         }
-//        switch (requestCode) {
-//            case PERMISSIONS_REQUEST_ENABLE_GPS: {
-//                if (mLocationPermissionGranted) {
-//                    Log.d(TAG, "readDataFromCSV: called.");
-//                    readDataFromCSV();
-//                } else {
-//                    getLocationPermission();
-//                }
-//            }
-//        }
-
     }
 
     public void passData() {
@@ -328,37 +308,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             {
 
 
-                if(line.contains(name)){
-                System.out.println("fuel here" + list);
-                lat = Double.parseDouble(line.split(",")[7]);
-                lon = Double.parseDouble(line.split(",")[8]);
-                fuel_type = new String(line.split(",")[9]);
+                if (line.contains(name)) {
+                    System.out.println("fuel here" + list + " > " + line.contains(name));
+                    lat = Double.parseDouble(line.split(",")[7]);
+                    lon = Double.parseDouble(line.split(",")[8]);
+                    fuel_type = new String(line.split(",")[9]);
 
 
-
-
-                img = new String(line.split(",")[2]);
-                 pos = new LatLng(lat, lon);
-                imglist.add(img);
-                address = new String(line.split(",")[3]);
-                suburb = new String(line.split(",")[4]);
-                state = new String(line.split(",")[5]);
-                postcode = Double.parseDouble(line.split(",")[6]);
-                cost = Double.parseDouble(line.split(",")[10]);
-                titles = img.toUpperCase() + " \n" + "Address: " + address + " ," + " " + suburb + " ," + state + " ," + postcode + " \n" + fuel_type + " ," + " $" + cost;
+                    img = new String(line.split(",")[2]);
+                    pos = new LatLng(lat, lon);
+                    imglist.add(img);
+                    address = new String(line.split(",")[3]);
+                    suburb = new String(line.split(",")[4]);
+                    state = new String(line.split(",")[5]);
+                    postcode = Double.parseDouble(line.split(",")[6]);
+                    cost = Double.parseDouble(line.split(",")[10]);
+                    titles = img.toUpperCase() + " \n" + "Address: " + address + " ," + " " + suburb + " ," + state + " ," + postcode + " \n" + fuel_type + " ," + " $" + cost;
 
                     mMap.addMarker(new MarkerOptions().position(mylocation).title("Current Position"));
                     mMap.addMarker(new MarkerOptions().position(pos).title(String.valueOf(titles)).icon(BitmapDescriptorFactory.fromResource(getResources().getIdentifier(img, "drawable", getPackageName()))));
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 18f));
                     mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
 
-            }
-                else
-                {
+                } else {
                     mMap.addMarker(new MarkerOptions().position(mylocation).title("Current Position"));
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mylocation, 18f));
                     mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
-                    Toast.makeText(this, "Somethings went wrong , currently no Fuel station available for your fuel type", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(this, "Somethings went wrong , currently no Fuel station available for your fuel type", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -381,8 +357,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            mMap.addMarker(new MarkerOptions().position(coord).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
 //            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coord, 18f));
 //            mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
-        }
-        }catch (IOException e) {
+            }
+        } catch (IOException e) {
             Log.wtf("MapsActivity", "Error reading data file on line" + line, e);
             e.printStackTrace();
         }
@@ -410,10 +386,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void adding_vehicle_expenses(View view) {
-        Intent intend = new Intent(this, adding_vehicle_expense.class);
+        Intent intend = new Intent(this, expense_view.class);
         startActivity(intend);
-//        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
-
     }
 
     public void changing_fuel_type(View view) {

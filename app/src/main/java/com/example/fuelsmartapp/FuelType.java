@@ -3,13 +3,17 @@ package com.example.fuelsmartapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +36,11 @@ public class FuelType extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fuel_type);
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
 
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
         hi = findViewById(R.id.hi);
         spinner1 = (Spinner) findViewById(R.id.spinner1);
 
@@ -55,7 +63,15 @@ public class FuelType extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void fuel_Check(View view) {
         View selectedView = spinner1.getSelectedView();
@@ -77,6 +93,10 @@ public class FuelType extends AppCompatActivity {
             intend.putExtra("text5",text);
             startActivity(intend);
         }
+    }
+    public void change_location(View view) {
+        Toast.makeText(this, "Service is not available !", Toast.LENGTH_LONG).show();
+
     }
 
 }
