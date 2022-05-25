@@ -50,9 +50,9 @@
         android:layout_width="55dp"
         android:layout_height="48dp"
         android:layout_marginTop="550dp"
+        android:background="@drawable/pump"
         android:contentDescription="@string/pump_image"
         android:visibility="visible"
-        android:background="@drawable/pump"
         app:srcCompat="@drawable/pump" />
 
     <TextView
@@ -85,8 +85,8 @@
         android:layout_marginTop="625dp"
         android:background="@drawable/vehicle"
         android:contentDescription="@string/vehicle"
-        android:visibility="visible"
         android:onClick="adding_vehicle_expenses"
+        android:visibility="visible"
         app:srcCompat="@drawable/vehicle" />
 
     <ImageView

@@ -74,7 +74,7 @@ public class login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(login.this, "Logged in Successfully", Toast.LENGTH_LONG).show();
                             userID = Objects.requireNonNull(fAuth.getCurrentUser()).getDisplayName();
                             System.out.println("User ID is >>"+userID);
                             startActivity(new Intent(getApplicationContext(),FuelType.class));
