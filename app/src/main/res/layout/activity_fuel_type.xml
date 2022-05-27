@@ -106,6 +106,7 @@
         android:text="Click here"
         android:textAlignment="center"
         android:textColor="#00E0FF"
+        android:onClick="change_location"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
