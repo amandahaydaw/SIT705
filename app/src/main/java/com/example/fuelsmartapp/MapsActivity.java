@@ -278,30 +278,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Initialization
         try {
             reader.readLine();
-//            while ((line = reader.readLine()) != null) {
-//                tokens = line.split(",");
-//                if (header || tokens[9].contains(name)) {
-//                    header = false;
-//                    list.add(line);
-//
-//                }
-//                for (int i = 0; i < list.size(); i++) {
-//                    System.out.println("here" + list.get(i));
-//                }
-
-//                coord = new LatLng(Double.parseDouble(tokens[7]), Double.parseDouble(tokens[8]));
-//                mylocation = new LatLng(-27.923659,153.403602);
-//                title = tokens[2] + " \n" + "Address: " + tokens[3] + " ," + " " + tokens[4] + " ," + tokens[5] + " ," + tokens[6] + " \n" + tokens[9] + " ," + " $" + tokens[10];
-//                title2 = "Fuel selected as " + tokens[9] + " is costing" + " $" + tokens[10] + " per liter";
-//                mMap.addMarker(new MarkerOptions().position(mylocation).title("Current Position"));
-//
-//                mMap.addMarker(new MarkerOptions().position(coord).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
-//                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coord, 18f));
-//                mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
-
-
-//            }
-
             mylocation = new LatLng(-27.923659, 153.403702);
 
             while ((line = reader.readLine()) != null) // Read until end of file
@@ -337,26 +313,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                    Toast.makeText(this, "Somethings went wrong , currently no Fuel station available for your fuel type", Toast.LENGTH_SHORT).show();
                 }
 
-
-// Add them to map
-//            for (LatLng pos : latLngList) {
-//
-//                for (int i = 0; i < imglist.size(); i++) {
-//
-//                    mMap.addMarker(new MarkerOptions().position(pos).title(title).icon(BitmapDescriptorFactory.fromResource(getResources().getIdentifier(imglist.get(i), "drawable", getPackageName()))));
-//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 18f));
-//                    mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
-//                }
-//            }
-//            coord = new LatLng(Double.parseDouble(tokens[7]), Double.parseDouble(tokens[8]));
-//            mylocation = new LatLng(-27.923659, 153.403702);
-//            title = tokens[2] + " \n" + "Address: " + tokens[3] + " ," + " " + tokens[4] + " ," + tokens[5] + " ," + tokens[6] + " \n" + tokens[9] + " ," + " $" + tokens[10];
-//            title2 = "Fuel selected as " + tokens[9] + " is costing" + " $" + tokens[10] + " per liter";
-//            mMap.addMarker(new MarkerOptions().position(mylocation).title("Current Position"));
-//
-//            mMap.addMarker(new MarkerOptions().position(coord).title(title).icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.seveneleven)));
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coord, 18f));
-//            mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(MapsActivity.this));
             }
         } catch (IOException e) {
             Log.wtf("MapsActivity", "Error reading data file on line" + line, e);
